@@ -14,7 +14,6 @@ window.addEventListener("message", (event) => {
   }
 });
 
-
 function buildTrackingJar() {
   return new Promise((resolve, reject) => {
     // check Facebook cookies
@@ -43,22 +42,29 @@ function getKnownParams() {
   // validation of Fb Clid cookie
   var timestamp = trackingParams.timestamp;
   // Cookie exists && has correct formatting
-  if (fbcCookie && fbcCookie.includes("fb.")) {
-    trackingParams["fbclid"] = fbcCookie;
-  // Cookie exists but has wrong formatting
-  } else if (fbcCookie && !fbcCookie.includes("fb.")) {
-    trackingParams["fbclid"] = "fb.1." + timestamp + "." + fbcCookie;
-  // Cookie DOESNT exist && param exists and it's not empty, && param has wrong formatting
-  } else if (!fbcCookie && trackingParams.fbclid && trackingParams.fbclid !== "" && !trackingParams.fbclid.includes("fb.")) {
-    trackingParams.fbclid = "fb.1." + timestamp + "." + trackingParams.fbclid;
-  } 
+  if (fbcCookie) {
+    if (fbcCookie.includes("fb.")) {
+      trackingParams["fbclid"] = fbcCookie;
+    } else {
+      // Cookie exists but has wrong formatting
+      trackingParams["fbclid"] = "fb.1." + timestamp + "." + fbcCookie;
+    }
+    // Cookie DOESNT exist && param exists and it's not empty, && param has wrong formatting
+  } else if (!fbcCookie && trackingParams.fbclid) {
+    if (
+      trackingParams.fbclid !== "" &&
+      !trackingParams.fbclid.includes("fb.")
+    ) {
+      trackingParams.fbclid = "fb.1." + timestamp + "." + trackingParams.fbclid;
+    }
+  }
 
   // get gclid from the local storage
   if (sessionStorage.getItem("gclid")) {
     trackingParams["gclid"] = sessionStorage.getItem("gclid");
   }
-   if (localStorage.getItem('lp')) {
-    trackingParams["landing_page"] = localStorage.getItem('lp');
+  if (localStorage.getItem("lp")) {
+    trackingParams["landing_page"] = localStorage.getItem("lp");
   }
 
   // get IP from the local storage
@@ -70,16 +76,14 @@ function getKnownParams() {
   trackingParams["client_user_agent"] = window.navigator.userAgent;
 
   // Facebook event unique ID
-  var fbEventId = ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(
-    /[018]/g,
-    (c) =>
-      (
-        c ^
-        (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
-      ).toString(16)
+  var fbEventId = ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
+    (
+      c ^
+      (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+    ).toString(16)
   );
-  
-  trackingParams["facebook_event_id"] = fbEventId; 
+
+  trackingParams["facebook_event_id"] = fbEventId;
 }
 
 // fill all the fields
