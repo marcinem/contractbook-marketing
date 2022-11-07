@@ -27,7 +27,7 @@ window.addEventListener("message", (event) => {
         countryField.options[countryField.selectedIndex].innerText;
     });
 
-    industryField = document.querySelector('[name="industry_bucket"]');
+    industryField = document.querySelector('select[name="industry_bucket"]');
     industryFieldValue =
       industryField.options[industryField.selectedIndex].innerText;
     industryField.addEventListener("change", function () {
