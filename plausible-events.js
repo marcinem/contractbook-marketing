@@ -19,7 +19,7 @@ window.addEventListener("message", (event) => {
       cFieldValue = cField.options[cField.selectedIndex].innerText;
     });
 
-    countryField = document.querySelector('[name="country_contact"]');
+    countryField = document.querySelector('select[name="country_contact"]');
     countryFieldValue =
       countryField.options[countryField.selectedIndex].innerText;
     countryField.addEventListener("change", function () {
