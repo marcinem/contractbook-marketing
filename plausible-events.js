@@ -13,26 +13,33 @@ window.addEventListener("message", (event) => {
     event.data.eventName === "onFormReady" &&
     event.data.id === "f7ecd4d4-2c45-44c2-b80e-bce529dbc495"
   ) {
-    cField = document.querySelector('[name="0-2/company_size_brackets"]');
-    cFieldValue = cField.options[cField.selectedIndex].innerText;
-    cField.addEventListener("change", function () {
-      cFieldValue = cField.options[cField.selectedIndex].innerText;
+    cField = document.querySelectorAll('[name="0-2/company_size_brackets"]');
+    cFieldValue = cField.value;
+    cField.forEach((e) => {
+      e.addEventListener("change", (event) => {
+        cFieldValue = event.target.value;
+        // send event to GTM
+        dataLayer.push({
+          event: "form-company-dropdown-change",
+          "hs-form-size": event.target.value,
+        });
+      });
     });
 
-    countryField = document.querySelector('select[name="country_contact"]');
-    countryFieldValue =
-      countryField.options[countryField.selectedIndex].innerText;
-    countryField.addEventListener("change", function () {
-      countryFieldValue =
-        countryField.options[countryField.selectedIndex].innerText;
+    countryField = document.querySelectorAll('select[name="country_contact"]');
+    countryFieldValue = countryField.value;
+    countryField.forEach((e) => {
+      e.addEventListener("change", (event) => {
+        countryFieldValue = event.target.value;
+      });
     });
 
-    industryField = document.querySelector('select[name="industry_bucket"]');
-    industryFieldValue =
-      industryField.options[industryField.selectedIndex].innerText;
-    industryField.addEventListener("change", function () {
-      industryFieldValue =
-        industryField.options[industryField.selectedIndex].innerText;
+    industryField = document.querySelectorAll('select[name="industry_bucket"]');
+    industryFieldValue = industryField.value;
+    industryField.forEach((e) => {
+      e.addEventListener("change", (event) => {
+        industryFieldValue = event.target.value;
+      });
     });
   }
 });
@@ -41,20 +48,6 @@ window.addEventListener("message", (event) => {
   if (
     event.data.type === "hsFormCallback" &&
     event.data.eventName === "onFormSubmit" &&
-    event.data.id === "f7ecd4d4-2c45-44c2-b80e-bce529dbc495"
-  ) {
-    cFieldValue = cField.options[cField.selectedIndex].innerText;
-    countryFieldValue =
-      countryField.options[countryField.selectedIndex].innerText;
-    industryFieldValue =
-      industryField.options[industryField.selectedIndex].innerText;
-  }
-});
-
-window.addEventListener("message", (event) => {
-  if (
-    event.data.type === "hsFormCallback" &&
-    event.data.eventName === "onFormSubmitted" &&
     event.data.id === "f7ecd4d4-2c45-44c2-b80e-bce529dbc495"
   ) {
     plausible("Meeting Booked", {
