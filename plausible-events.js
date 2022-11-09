@@ -13,15 +13,39 @@ window.addEventListener("message", (event) => {
     event.data.eventName === "onFormReady" &&
     event.data.id === "f7ecd4d4-2c45-44c2-b80e-bce529dbc495"
   ) {
+    // form clicker listener
+    form = document.querySelectorAll(
+      'form[id="hsForm_f7ecd4d4-2c45-44c2-b80e-bce529dbc495"]'
+    );
+    form.forEach((e) => {
+      e.addEventListener(
+        "click",
+        (event) => {
+          plausible("Significant PV", {
+            props: {
+              Page: "https://contractbook.com" + locationHref,
+              Type: "Form interaction",
+            },
+          });
+        },
+        { once: true }
+      );
+    });
+
     cField = document.querySelectorAll('[name="0-2/company_size_brackets"]');
     cFieldValue = cField.value;
     cField.forEach((e) => {
       e.addEventListener("change", (event) => {
-        cFieldValue = event.target.value;
         // send event to GTM
-        dataLayer.push({
-          event: "form-company-dropdown-change",
-          "hs-form-size": event.target.value,
+        // dataLayer.push({
+        //   event: "form-company-dropdown-change",
+        //   "hs-form-size": event.target.value,
+        // });
+        plausible("Company Size Change", {
+          props: {
+            Page: "https://contractbook.com" + locationHref,
+            Company_Size: event.target.value,
+          },
         });
       });
     });
@@ -77,7 +101,10 @@ window.addEventListener("DOMContentLoaded", function (e) {
   setTimeout(function () {
     if (regex.test(locationHref)) {
       plausible("Significant PV", {
-        props: { Page: "https://contractbook.com" + locationHref },
+        props: {
+          Page: "https://contractbook.com" + locationHref,
+          Type: "Page view",
+        },
       });
     }
   }, 3500);
