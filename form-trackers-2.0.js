@@ -67,6 +67,9 @@ function getKnownParams() {
     trackingParams["landing_page"] = localStorage.getItem("lp");
   }
 
+  // save information about convertion page
+  trackingParams["conversion_page"] = window.location.href;
+
   // get IP from the local storage
   if (sessionStorage.getItem("clientIp")) {
     trackingParams["ip_address_form"] = sessionStorage.getItem("clientIp");
