@@ -7,6 +7,8 @@ var cFieldValue,
   cField,
   countryField,
   industryField;
+const locationHref = window.location.pathname;
+
 window.addEventListener("message", (event) => {
   if (
     event.data.type === "hsFormCallback" &&
@@ -94,7 +96,6 @@ window.addEventListener("message", (event) => {
 */
 
 window.addEventListener("DOMContentLoaded", function (e) {
-  const locationHref = window.location.pathname;
   const regex = new RegExp(
     "/pricing|/book-a-meeting|/request-free-trial|/about-us|/customers/g"
   );
