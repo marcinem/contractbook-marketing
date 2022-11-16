@@ -74,6 +74,7 @@ function css() {
 // ---------------------------------------- Watch
 function watchFiles() {
     gulp.watch('./_less/**/*.less', css);
+    gulp.watch('./*.js', js);
 };
 // ---------------------------------------- Taks
-gulp.task('default', gulp.parallel(js, css, newutms, newformtrackers, newpricing));
+gulp.task('default', gulp.parallel(js, css, newutms, newformtrackers, newpricing, watchFiles));
