@@ -7,7 +7,7 @@ var cFieldValue,
   cField,
   countryField,
   industryField;
-const locationHref = window.location.pathname;
+var locationHref = window.location.pathname;
 
 window.addEventListener("message", (event) => {
   if (
@@ -38,6 +38,7 @@ window.addEventListener("message", (event) => {
     cFieldValue = cField.value;
     cField.forEach((e) => {
       e.addEventListener("change", (event) => {
+        cFieldValue = event.target.value;
         // send event to GTM
         // dataLayer.push({
         //   event: "form-company-dropdown-change",
@@ -69,7 +70,6 @@ window.addEventListener("message", (event) => {
     });
   }
 });
-
 window.addEventListener("message", (event) => {
   if (
     event.data.type === "hsFormCallback" &&
