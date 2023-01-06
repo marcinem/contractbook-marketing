@@ -35,26 +35,22 @@ window.addEventListener("message", (event) => {
     });
 
     cField = document.querySelectorAll('[name="0-2/company_size_brackets"]');
-    cFieldValue = cField.value;
+    cFieldValue = cField[0].value;
+
     cField.forEach((e) => {
       e.addEventListener("change", (event) => {
         cFieldValue = event.target.value;
-        // send event to GTM
-        // dataLayer.push({
-        //   event: "form-company-dropdown-change",
-        //   "hs-form-size": event.target.value,
-        // });
         plausible("Company Size Change", {
           props: {
             Page: "https://contractbook.com" + locationHref,
-            Company_Size: event.target.value,
+            Company_Size: cFieldValue,
           },
         });
       });
     });
 
     countryField = document.querySelectorAll('select[name="country_contact"]');
-    countryFieldValue = countryField.value;
+    countryFieldValue = countryField[0].value;
     countryField.forEach((e) => {
       e.addEventListener("change", (event) => {
         countryFieldValue = event.target.value;
@@ -62,7 +58,7 @@ window.addEventListener("message", (event) => {
     });
 
     industryField = document.querySelectorAll('select[name="industry_bucket"]');
-    industryFieldValue = industryField.value;
+    industryFieldValue = industryField[0].value;
     industryField.forEach((e) => {
       e.addEventListener("change", (event) => {
         industryFieldValue = event.target.value;
