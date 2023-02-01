@@ -6,6 +6,7 @@ const params = new URLSearchParams(url);
 const companyName = params.get("companyName");
 const companySize = params.get("Employees");
 const companyIndustry = params.get("Industry");
+var nameField, sizeField, industryField;
 
 window.addEventListener("message", (event) => {
   if (
@@ -14,14 +15,13 @@ window.addEventListener("message", (event) => {
   ) {
     if (companyName && companySize && companyIndustry)
       console.log(companyName, companySize, companyIndustry);
+    nameField = document.querySelector("[name='company']");
+    sizeField = document.querySelector("[name='0-2\\/company_size_brackets']");
+    industryField = document.querySelector("[name='industry_bucket']");
     fillFromURL(companySize, companyName, companyIndustry);
   }
 
   function fillFromURL(companySize, companyName, companyIndustry) {
-    nameField = document.querySelector("[name='company']");
-    sizeField = document.querySelector("[name='0-2\\/company_size_brackets']");
-    industryField = document.querySelector("[name='industry_bucket']");
-
     nameField.value = companyName;
     nameField.dispatchEvent(new Event("input", { bubbles: true }));
 
