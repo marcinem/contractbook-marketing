@@ -1,3 +1,95 @@
+//Blogpost card
+.blog__post--cms-list {
+    .blog__post--cover {
+        height: auto;
+    }
+}
+.blog__post--content {
+    .blog__post--author-parent {
+        margin-top: 0;
+    }
+    .blog__post--descr  {
+        .p_blog-tile {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+    }
+    .h2_blog {
+        line-height: 1.3;
+        @media screen and (min-width: 1920px){
+            font-size: 26px;
+        }
+    }
+}
+
+// Blogpost
+@media screen and (max-width: 767px){
+    .blog__post--cms-list {
+        grid-row-gap: 2rem;
+    }
+    .blog-pin .sticky-72 {
+        width: 100%;
+    }
+
+}
+
+@media screen and (max-width: 767px){
+    .hero-blog {
+        margin-top: 108px;
+        margin-bottom: 28px;
+    }
+    .blog__latest--content {
+        margin-top: 32px;
+    }
+    .blog__latest--author-parent .blog__latest--author-avatar.margin--16px-right {
+        margin-right: 3.83em;
+    }
+    .blog__post.margin--50px-top {
+        margin-top: 2rem;
+        padding-top: 32px;
+    }
+    .blog__split.reverse {
+        flex-direction: column;
+    }
+}
+
+
+@media screen and (min-width: 1920px){
+.blog__post--cms-list {
+        grid-row-gap: 3rem;
+    }
+}
+.posten-on_blog-hero {
+    margin-bottom: 12px;
+}
+
+.h1_blog-hero {
+    padding-top: 12px;
+}
+.blog__avatar {
+    border-radius: 999px;
+}
+
+
+@media screen and (max-width: 991px){
+    .section_blog-hero {
+        padding-top: 124px;
+    }
+    .h1_blog-hero {
+        font-size: 30px;
+        line-height: 1.3;
+
+    }
+}
+@media screen and (max-width: 767px){
+    .rich-text figure {
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
+    .w-richtext figure {
+        width: 100%;
+    }
+}
 
 @media screen and (max-width: 479px){
     .blog__post--cms-item  {
@@ -19,4 +111,38 @@
 }
 .blog-sidebar__webinar--img {
     height: auto!important;
+}
+.w-richtext figure.w-richtext-align-fullwidth>div {
+    padding-bottom: 0;
+}
+.w-richtext figure.w-richtext-figure-type-image, .w-richtext figure[data-rt-type=image] {
+    display: block;
+    text-align: center;
+    max-width:100%;
+    background-color: #F7F7F3;
+    padding-top: 40px;
+    padding-bottom: 35px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-radius: 16px;
+
+}
+.w-richtext figure.w-richtext-figure-type-image>div {
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.w-richtext figure img {
+    max-width: 100%;
+    width: auto;
+}
+.w-richtext figure.w-richtext-figure-type-image>figcaption, .w-richtext figure[data-rt-type=image]>figcaption {
+    display: inline-block;
+    margin: 0;
+    font-size: 14px;
+}
+.rich-text a {
+    color: inherit;
+    text-decoration: underline;
+    font-weight: bold;
 }
