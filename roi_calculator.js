@@ -5,7 +5,7 @@ field_salary = document.getElementById("salary");
 var calculate_fields = document.getElementById("calculate-fields");
 
 // Default INIT values
-field_hours_number.value = 40;
+field_hours_number.value = 80;
 field_salary.value = 6500;
 
 var savings;
