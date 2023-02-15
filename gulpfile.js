@@ -65,6 +65,13 @@ function demoTest() {
     .pipe(uglify())
     .pipe(gulp.dest("./__dist/"));
 }
+function mutinyTracking() {
+  return gulp
+    .src("./mutiny-tracking.js")
+    .pipe(concat("mutiny-tracking.min.js"))
+    .pipe(uglify())
+    .pipe(gulp.dest("./__dist/"));
+}
 // ---------------------------------------- CSS
 function css() {
   return gulp
@@ -88,5 +95,13 @@ function watchFiles() {
 // ---------------------------------------- Taks
 gulp.task(
   "default",
-  gulp.parallel(js, css, newutms, newformtrackers, newpricing, demoTest),
+  gulp.parallel(
+    js,
+    css,
+    newutms,
+    newformtrackers,
+    newpricing,
+    demoTest,
+    mutinyTracking,
+  ),
 );
