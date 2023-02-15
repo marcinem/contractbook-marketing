@@ -27,7 +27,7 @@ function updateHubspotFields() {
     JSON.parse(sessionStorage.getItem("mutiny_experience_data")) || [];
   var audienceSegments = experiences
     .map(function (a) {
-      return a.audienceSegment;
+      return a.audienceSegment.name;
     })
     .join();
   document.querySelector('input[name="' + audienceSegmentClass + '"]')
@@ -38,7 +38,7 @@ function updateHubspotFields() {
 
   var experienceNames = experiences
     .map(function (a) {
-      return a.experience;
+      return a.experience.description;
     })
     .join();
   document.querySelector('input[name="' + experienceNameClass + '"]')
@@ -49,7 +49,7 @@ function updateHubspotFields() {
 
   var impressionTypes = experiences
     .map(function (a) {
-      return a.impressionType;
+      return a.experience.experience_type;
     })
     .join();
   document.querySelector('input[name="' + impressionTypeClass + '"]')
@@ -60,7 +60,7 @@ function updateHubspotFields() {
 
   var variationNames = experiences
     .map(function (a) {
-      return a.variationName;
+      return a.experience.variation_name;
     })
     .join();
   document.querySelector('input[name="' + variationNamesClass + '"]')
