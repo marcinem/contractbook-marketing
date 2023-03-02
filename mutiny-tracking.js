@@ -17,6 +17,9 @@ function mutinyToStorage() {
   );
 }
 
+//variant: "498f9ef2-2891-46b4-b14b-e95504b6e8d5"
+//control: "689893e9-9e5f-4ac6-944e-be702449f8db"
+
 function updateHubspotFields() {
   var audienceSegmentClass = "mutiny_audience_segment";
   var experienceNameClass = "mutiny_experience_names";
@@ -49,7 +52,7 @@ function updateHubspotFields() {
 
   var impressionTypes = experiences
     .map(function (a) {
-      return a.experience.experience_type;
+      return a.impressionType;
     })
     .join();
   document.querySelector('input[name="' + impressionTypeClass + '"]')
