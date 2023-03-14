@@ -109,7 +109,7 @@ window.addEventListener("load", () => {
     plausible("Mutiny", {
       props: {
         experiment_variant:
-          experience.experience + " | " + experience.impressionType,
+          event.detail.experience + " | " + event.detail.impressionType,
       },
     });
   });
