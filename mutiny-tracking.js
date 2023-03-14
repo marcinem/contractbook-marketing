@@ -93,3 +93,22 @@ if (document.querySelector('form[id^="hsForm"]')) {
     }
   });
 }
+
+if (window.mutiny.experiences) {
+  window.mutiny.experiences.forEach(function (experience) {
+    plausible("Mutiny", {
+      props: {
+        experiment_variant:
+          experience.experience + " | " + experience.impressionType,
+      },
+    });
+  });
+}
+window.addEventListener("mutiny:experience-impression", function (event) {
+  plausible("Mutiny", {
+    props: {
+      experiment_variant:
+        experience.experience + " | " + experience.impressionType,
+    },
+  });
+});
