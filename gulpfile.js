@@ -103,5 +103,6 @@ gulp.task(
     newpricing,
     demoTest,
     mutinyTracking,
+    watchFiles
   ),
 );

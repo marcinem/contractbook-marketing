@@ -1,235 +1,239 @@
-/*         */
-/*   Form  */
-/* Form title */
-.hs-form-demo_booking {
-  width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  border-radius: 0.75rem;
-  background-color: transparent;
-  flex-direction: column;
-}
-.hbspt-form {
-  width: 100%;
-}
-
-.hs-richtext {
-  margin-top: 10px;
-}
-
-/* Columns and wrappers */
-.form-columns-2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  background-color: transparent;
-}
-/* Labels */
-label {
-  margin-top: 15px;
-  margin-bottom: 5px;
-  text-align: left;
-  font-size: 0.83em;
-  line-height: 1;
-  font-weight: 400;
-  display: block;
-  color: #131e41;
-}
-/* Form fields */
-form .input {
-  height: 2.71em;
-  margin-top: auto;
-  margin-bottom: auto;
-  padding-right: 0.73em;
-  padding-left: 0.73em;
-  border: 0px none #000;
-  border-radius: 0.31em;
-  background-color: #fff;
-  border: 1px solid transparent;
-  width: 100%;
-  /* margin-bottom: 1rem  ; */
-}
-.hs-fieldtype-intl-phone {
-  height: 100%;
-}
-// .hs_firstname,
-// .hs_company {
-//   border-right: 0;
-//   margin-right: 1.04em;
-// }
-
-form fieldset {
-  max-width: 100%; /* stylelint-disable-line declaration-no-important */
-}
-/* Form fields - checkbox/radio */
-form .inputs-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-form .inputs-list > li {
-  display: block;
-  margin: 0.7rem 0;
-}
-form .inputs-list input,
-form .inputs-list span {
-  vertical-align: middle;
-}
-form input[type="checkbox"],
-form input[type="radio"] {
-  cursor: pointer;
-  margin-right: 0.35rem;
-}
-/* Form fields - date picker */
-form .hs-dateinput {
-  position: relative;
-}
-form .hs-dateinput:before {
-  content: "\01F4C5";
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
-form .is-selected .pika-button {
-  border-radius: 0; /* stylelint-disable-line declaration-no-important */
-  box-shadow: none; /* stylelint-disable-line declaration-no-important */
-}
-form .fn-date-picker .pika-button:hover,
-form .fn-date-picker .pika-button:focus {
-  border-radius: 0; /* stylelint-disable-line declaration-no-important */
-}
-
-form input:focus,
-form select:focus {
-  outline: transparent;
-}
-/* Form fields - file picker */
-form input[type="file"] {
-  background-color: transparent;
-  border: initial;
-  padding: initial;
-}
-/* Headings and text */
-form .hs-richtext,
-form .hs-richtext p {
-  font-size: 0.73em;
-  margin: 0 0 1.4vw;
-}
-form .hs-richtext img {
-  height: auto;
-  max-width: 100%; /* stylelint-disable-line declaration-no-important */
-}
-/* GDPR */
-form .legal-consent-container .hs-form-booleancheckbox-display > span {
-  margin-left: 1rem; /* stylelint-disable-line declaration-no-important */
-}
-/* Validation */
-ul.no-list {
-  list-style-type: none;
-}
-ul.hs-error-msgs {
-  width: 100%;
-  background: #ef6b51;
-  color: #fff;
-  border: 1px solid #ef6b51;
-  padding: 4px 10px;
-  font-size: 10px;
-  font-weight: 400;
-  line-height: 120%;
-  margin-bottom: 1rem;
-  margin-top: -1rem;
-}
-ul.hs-error-msgs > li {
-  margin: 0;
-}
-ul.hs-error-msgs > li > label {
-  margin: 0;
-}
-/* Submit button */
-.actions {
-  height: 3.13em;
-  display: flex;
-  align-items: stretch;
-  width: 100%;
-  border-radius: 0.73em;
-  overflow: hidden;
-}
-form input[type="submit"],
-form .hs-button {
-  cursor: pointer;
-  display: inline-block;
-  text-align: center;
-  transition: all 0.15s linear;
-  white-space: normal; /* stylelint-disable-line declaration-no-important */
-  width: 100%;
-  align-items: center;
-  border: 0;
-  background-color: #1009f6;
-  color: #fff;
-  font-size: 0.83em;
-  line-height: 1;
-  font-weight: 600;
-  text-align: center;
-}
-/* Captcha */
-.grecaptcha-badge {
-  margin: 0 auto;
-}
-.hs-error-msg {
-  font-size: 1em;
-  color: white;
-}
-/*Modifiers*/
-.hs-form-dd9b1325-a928-43d2-8da1-efb7eca12c60_0013f348-90a9-4eef-803f-652ff167bc3a
-  fieldset.form-columns-1
-  .hs-input {
-  width: 100%;
-}
-/* mobile modifications */
-@media only screen and (max-width: 992px) {
-  .hs-form-blog_test {
-    flex-direction: column;
-  }
-  .form-columns-2 {
-    flex-direction: column;
-  }
-  .hs_firstname {
-    margin-right: 0;
-  }
-  .hs-form-field {
-    width: 100%;
-  }
-  form .hs-input {
-    width: 100%;
-  }
-  .input {
-    height: 42px;
-    margin-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-size: 14px;
-  }
-  label {
-    font-size: 15px;
-  }
-  .actions {
-    height: 42px;
-    font-size: 14px;
-  }
-
+.hbspt-form  {
+  /*         */
+  /*   Form  */
+  /* Form title */
   .hs-form-demo_booking {
-    max-width: 90%;
-    margin: 0 auto;
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    border-radius: 0.75rem;
+    background-color: transparent;
+    flex-direction: column;
+  }
+  .hbspt-form {
+    width: 100%;
   }
 
   .hs-richtext {
-    font-size: 14px;
+    margin-top: 10px;
   }
+
+  /* Columns and wrappers */
+  .form-columns-2 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: transparent;
+  }
+  /* Labels */
+  label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    text-align: left;
+    font-size: 0.83em;
+    line-height: 1;
+    font-weight: 400;
+    display: block;
+    color: #131e41;
+  }
+  /* Form fields */
+  form .input {
+    height: 2.71em;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-right: 0.73em;
+    padding-left: 0.73em;
+    border: 0px none #000;
+    border-radius: 0.31em;
+    background-color: #fff;
+    border: 1px solid transparent;
+    width: 100%;
+    /* margin-bottom: 1rem  ; */
+  }
+  .hs-fieldtype-intl-phone {
+    height: 100%;
+  }
+  // .hs_firstname,
+  // .hs_company {
+  //   border-right: 0;
+  //   margin-right: 1.04em;
+  // }
+
+  form fieldset {
+    max-width: 100%; /* stylelint-disable-line declaration-no-important */
+  }
+  /* Form fields - checkbox/radio */
+  form .inputs-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  form .inputs-list > li {
+    display: block;
+    margin: 0.7rem 0;
+  }
+  form .inputs-list input,
+  form .inputs-list span {
+    vertical-align: middle;
+  }
+  form input[type="checkbox"],
+  form input[type="radio"] {
+    cursor: pointer;
+    margin-right: 0.35rem;
+  }
+  /* Form fields - date picker */
+  form .hs-dateinput {
+    position: relative;
+  }
+  form .hs-dateinput:before {
+    content: "\01F4C5";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  form .is-selected .pika-button {
+    border-radius: 0; /* stylelint-disable-line declaration-no-important */
+    box-shadow: none; /* stylelint-disable-line declaration-no-important */
+  }
+  form .fn-date-picker .pika-button:hover,
+  form .fn-date-picker .pika-button:focus {
+    border-radius: 0; /* stylelint-disable-line declaration-no-important */
+  }
+
+  form input:focus,
+  form select:focus {
+    outline: transparent;
+  }
+  /* Form fields - file picker */
+  form input[type="file"] {
+    background-color: transparent;
+    border: initial;
+    padding: initial;
+  }
+  /* Headings and text */
+  form .hs-richtext,
+  form .hs-richtext p {
+    font-size: 0.73em;
+    margin: 0 0 1.4vw;
+  }
+  form .hs-richtext img {
+    height: auto;
+    max-width: 100%; /* stylelint-disable-line declaration-no-important */
+  }
+  /* GDPR */
+  form .legal-consent-container .hs-form-booleancheckbox-display > span {
+    margin-left: 1rem; /* stylelint-disable-line declaration-no-important */
+  }
+  /* Validation */
+  ul.no-list {
+    list-style-type: none;
+  }
+  ul.hs-error-msgs {
+    width: 100%;
+    background: #ef6b51;
+    color: #fff;
+    border: 1px solid #ef6b51;
+    padding: 4px 10px;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 120%;
+    margin-bottom: 1rem;
+    margin-top: -1rem;
+  }
+  ul.hs-error-msgs > li {
+    margin: 0;
+  }
+  ul.hs-error-msgs > li > label {
+    margin: 0;
+  }
+  /* Submit button */
+  .actions {
+    height: 3.13em;
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    border-radius: 0.73em;
+    overflow: hidden;
+  }
+  form input[type="submit"],
+  form .hs-button {
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    transition: all 0.15s linear;
+    white-space: normal; /* stylelint-disable-line declaration-no-important */
+    width: 100%;
+    align-items: center;
+    border: 0;
+    background-color: #1009f6;
+    color: #fff;
+    font-size: 0.83em;
+    line-height: 1;
+    font-weight: 600;
+    text-align: center;
+  }
+  /* Captcha */
+  .grecaptcha-badge {
+    margin: 0 auto;
+  }
+  .hs-error-msg {
+    font-size: 1em;
+    color: white;
+  }
+  /*Modifiers*/
+  .hs-form-dd9b1325-a928-43d2-8da1-efb7eca12c60_0013f348-90a9-4eef-803f-652ff167bc3a
+    fieldset.form-columns-1
+    .hs-input {
+    width: 100%;
+  }
+  /* mobile modifications */
+  @media only screen and (max-width: 992px) {
+    .hs-form-blog_test {
+      flex-direction: column;
+    }
+    .form-columns-2 {
+      flex-direction: column;
+    }
+    .hs_firstname {
+      margin-right: 0;
+    }
+    .hs-form-field {
+      width: 100%;
+    }
+    form .hs-input {
+      width: 100%;
+    }
+    .input {
+      height: 42px;
+      margin-top: 10px;
+      padding-left: 10px;
+      padding-right: 10px;
+      font-size: 14px;
+    }
+    label {
+      font-size: 15px;
+    }
+    .actions {
+      height: 42px;
+      font-size: 14px;
+    }
+
+    .hs-form-demo_booking {
+      max-width: 90%;
+      margin: 0 auto;
+    }
+
+    .hs-richtext {
+      font-size: 14px;
+    }
 }
+
+}
+
