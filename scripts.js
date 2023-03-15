@@ -76,7 +76,7 @@ function msfLabels() {
     text = text.replace("First name", "1. What is your first name?");
     text = text.replace("Last name", "2. What is your last name?");
     text = text.replace("Email", "3. What is your email?");
-    text = text.replace("Country", "4. What is your contry?");
+    text = text.replace("Country", "4. What is your country?");
     text = text.replace("Phone number", "5. What is your phone number?");
     label.innerHTML = text;
   });
