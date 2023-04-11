@@ -95,8 +95,9 @@ if (document.querySelector('form[id^="hsForm"]')) {
 }
 
 window.addEventListener("load", () => {
-  if (window.mutiny.experiences) {
-    window.mutiny.experiences.forEach(function (experience) {
+  var sessionMutinyStorage = JSON.parse(sessionStorage.getItem("mutiny_experience_data"));
+  if (sessionMutinyStorage) {
+    sessionMutinyStorage.forEach(function (experience) {
       plausible("Mutiny", {
         props: {
           experiment_variant:
@@ -105,7 +106,7 @@ window.addEventListener("load", () => {
       });
     });
   }
-window.addEventListener("mutiny:experience-impression", function (event) {
+  window.addEventListener("mutiny:experience-impression", function (event) {
     plausible("Mutiny", {
       props: {
         experiment_variant:
