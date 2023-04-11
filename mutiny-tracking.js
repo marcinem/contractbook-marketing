@@ -73,7 +73,7 @@ function updateHubspotFields() {
     : null;
 }
 
-if (window.mutiny.client.experiences) {
+if (window.mutiny && window.mutiny.client && window.mutiny.client.experiences) {
   mutinyToStorage();
 } else {
   window.addEventListener("mutiny:experience-impression", function (event) {
@@ -105,7 +105,7 @@ window.addEventListener("load", () => {
       });
     });
   }
-  window.addEventListener("mutiny:experience-impression", function (event) {
+window.addEventListener("mutiny:experience-impression", function (event) {
     plausible("Mutiny", {
       props: {
         experiment_variant:
