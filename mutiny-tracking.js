@@ -95,23 +95,26 @@ if (document.querySelector('form[id^="hsForm"]')) {
 }
 
 window.addEventListener("load", () => {
-  var sessionMutinyStorage = JSON.parse(sessionStorage.getItem("mutiny_experience_data"));
-  if (sessionMutinyStorage) {
-    sessionMutinyStorage.forEach(function (experience) {
+  // this is wrapped in setTimeout because we need to wait for Plausbile to load.
+  setTimeout(() => {
+    var sessionMutinyStorage = JSON.parse(sessionStorage.getItem("mutiny_experience_data"));
+    if (sessionMutinyStorage) {
+      sessionMutinyStorage.forEach(function (experience) {
+        plausible("Mutiny", {
+          props: {
+            experiment_variant:
+              experience.experience + " | " + experience.impressionType,
+          },
+        });
+      });
+    }
+    window.addEventListener("mutiny:experience-impression", function (event) {
       plausible("Mutiny", {
         props: {
           experiment_variant:
-            experience.experience + " | " + experience.impressionType,
+            event.detail.experience + " | " + event.detail.impressionType,
         },
       });
     });
-  }
-  window.addEventListener("mutiny:experience-impression", function (event) {
-    plausible("Mutiny", {
-      props: {
-        experiment_variant:
-          event.detail.experience + " | " + event.detail.impressionType,
-      },
-    });
-  });
+  }, 2600);
 });
