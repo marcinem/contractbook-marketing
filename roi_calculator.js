@@ -52,5 +52,6 @@ function showform() {
 field_hours_number.addEventListener("input", calculateROI);
 field_salary.addEventListener("input", calculateROI);
 requestButton.addEventListener("click", showform);
+requestButton.addEventListener("click", calculateROI);
 
 calculateROI();
