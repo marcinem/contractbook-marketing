@@ -1,4 +1,4 @@
-/* 
+/*
 ######## Global
 */
 
@@ -21,7 +21,7 @@ select {
   font-weight: 400;
   color: #000;
   font-size: 0.78rem;
-  padding: 0.3rem 0; 
+  padding: 0.3rem 0;
   background: transparent;
   border-color: transparent;
 }
@@ -150,7 +150,8 @@ input[type=checkbox] {
   padding-left: 0.73em;
   border: 0px none #000;
   border-radius: 0.31em;
-  background-color: #fff;
+  /* background-color: #fff; */
+  background-color: #F0F0EC;
   border: 1px solid transparent;
   width: 100% !important;
   /* margin-bottom: 1rem !important; */
@@ -165,9 +166,9 @@ input[type=checkbox] {
 }
 
 #hsForm_f7ecd4d4-2c45-44c2-b80e-bce529dbc495 fieldset {
-  max-width: 100% !important; 
+  max-width: 100% !important;
 }
-  
+
 #hsForm_f7ecd4d4-2c45-44c2-b80e-bce529dbc495 .inputs-list {
   list-style: none;
   margin: 0;
@@ -202,7 +203,7 @@ input[type=checkbox] {
   display: inline-block;
   text-align: center;
   transition: all 0.15s linear;
-  white-space: normal !important; 
+  white-space: normal !important;
   width: 100%;
   align-items: center;
   border: 0;
@@ -263,14 +264,14 @@ input[type=checkbox] {
 
 
 
-/* 
+/*
 ######
-Webinars 
+Webinars
 ######
 */
 
 
-#hsForm_393de009-214e-49b1-8ee1-a569dfad7b90 input[type='submit'], 
+#hsForm_393de009-214e-49b1-8ee1-a569dfad7b90 input[type='submit'],
 #hsForm_393de009-214e-49b1-8ee1-a569dfad7b90 .hs-button {
   cursor: pointer;
   margin: 12px;
@@ -348,7 +349,7 @@ Webinars
   margin-bottom: 5px;
   color: #131e41;
 }
-    
+
 
 /* Form fields */
   #hsForm_393de009-214e-49b1-8ee1-a569dfad7b90 .hs-input {
