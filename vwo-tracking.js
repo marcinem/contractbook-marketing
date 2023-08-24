@@ -37,7 +37,6 @@ var captureExperiments = function () {
             id: id,
             name: experiment.name,
             type: experiment.type,
-            // status: experiment.status,
             variation: variationName,
           });
         }
@@ -59,7 +58,7 @@ function updateVwoHubspotFields() {
 
   var experienceNames = experiences
     .map(function (a) {
-      return a.experience.description;
+      return a.name;
     })
     .join();
   document.querySelector('input[name="' + experienceNameClass + '"]')
@@ -70,7 +69,7 @@ function updateVwoHubspotFields() {
 
   var impressionTypes = experiences
     .map(function (a) {
-      return a.impressionType;
+      return a.type;
     })
     .join();
   document.querySelector('input[name="' + impressionTypeClass + '"]')
@@ -81,7 +80,7 @@ function updateVwoHubspotFields() {
 
   var variationNames = experiences
     .map(function (a) {
-      return a.experience.variation_name;
+      return a.variation;
     })
     .join();
   document.querySelector('input[name="' + variationNamesClass + '"]')
