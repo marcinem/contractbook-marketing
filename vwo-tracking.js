@@ -55,7 +55,7 @@ function updateVwoHubspotFields() {
   var impressionTypeClass = "vwo_impression_type";
   var variationNamesClass = "vwo_variation_names";
 
-  var experiences = JSON.parse(sessionStorage.getItem("vwo_experiments")) || [];
+  var experiences = JSON.parse(localStorage.getItem("vwo_experiments")) || [];
 
   var experienceNames = experiences
     .map(function (a) {
