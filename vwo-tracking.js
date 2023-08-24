@@ -27,11 +27,9 @@ var captureExperiments = function () {
       var experiment = window._vwo_exp[id];
 
       if (experiment) {
-        // Get the combination number and use it to get the variation name
         var combinationNum = experiment.combination_chosen;
         var variationName = experiment.comb_n[combinationNum];
 
-        // Only include running experiments
         if (experiment.status === "RUNNING") {
           data.push({
             id: id,
@@ -44,7 +42,6 @@ var captureExperiments = function () {
     }
   }
 
-  // Get existing data
   var existingData = JSON.parse(localStorage.getItem("vwo_experiments")) || [];
 
   data.forEach(function (newExperiment) {
@@ -52,7 +49,6 @@ var captureExperiments = function () {
       return existingExperiment.id === newExperiment.id;
     });
 
-    // If it's not a duplicate, add it to the existingData
     if (index === -1) {
       if (existingData.length < 5) {
         existingData.unshift(newExperiment);
@@ -61,19 +57,10 @@ var captureExperiments = function () {
         existingData.pop();
       }
     } else {
-      // If it's a duplicate but data is different, replace it
-      var existingExperiment = existingData[index];
-      if (
-        existingExperiment.name !== newExperiment.name ||
-        existingExperiment.type !== newExperiment.type ||
-        existingExperiment.variation !== newExperiment.variation
-      ) {
-        existingData[index] = newExperiment;
-      }
+      existingData[index] = newExperiment; // directly replace the existing data with the new data
     }
   });
 
-  // Store the merged data in localStorage
   localStorage.setItem("vwo_experiments", JSON.stringify(existingData));
 };
 
