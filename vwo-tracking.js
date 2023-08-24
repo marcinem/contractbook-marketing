@@ -48,18 +48,27 @@ var captureExperiments = function () {
   var existingData = JSON.parse(localStorage.getItem("vwo_experiments")) || [];
 
   data.forEach(function (newExperiment) {
-    // Check if the experiment is already in existingData
-    var isDuplicate = existingData.some(function (existingExperiment) {
+    var index = existingData.findIndex(function (existingExperiment) {
       return existingExperiment.id === newExperiment.id;
     });
 
     // If it's not a duplicate, add it to the existingData
-    if (!isDuplicate) {
+    if (index === -1) {
       if (existingData.length < 5) {
         existingData.unshift(newExperiment);
       } else {
         existingData.unshift(newExperiment);
         existingData.pop();
+      }
+    } else {
+      // If it's a duplicate but data is different, replace it
+      var existingExperiment = existingData[index];
+      if (
+        existingExperiment.name !== newExperiment.name ||
+        existingExperiment.type !== newExperiment.type ||
+        existingExperiment.variation !== newExperiment.variation
+      ) {
+        existingData[index] = newExperiment;
       }
     }
   });
