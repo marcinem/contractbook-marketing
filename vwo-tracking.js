@@ -44,8 +44,28 @@ var captureExperiments = function () {
     }
   }
 
-  // Store the data in localStorage
-  localStorage.setItem("vwo_experiments", JSON.stringify(data));
+  // Get existing data
+  var existingData = JSON.parse(localStorage.getItem("vwo_experiments")) || [];
+
+  data.forEach(function (newExperiment) {
+    // Check if the experiment is already in existingData
+    var isDuplicate = existingData.some(function (existingExperiment) {
+      return existingExperiment.id === newExperiment.id;
+    });
+
+    // If it's not a duplicate, add it to the existingData
+    if (!isDuplicate) {
+      if (existingData.length < 5) {
+        existingData.unshift(newExperiment);
+      } else {
+        existingData.unshift(newExperiment);
+        existingData.pop();
+      }
+    }
+  });
+
+  // Store the merged data in localStorage
+  localStorage.setItem("vwo_experiments", JSON.stringify(existingData));
 };
 
 // Update Hubspot fields:
@@ -126,10 +146,10 @@ function sendEventsToPlausible() {
   });
 }
 
-checkVWO();
-
 function getCookie(name) {
   var value = "; " + document.cookie;
   var parts = value.split("; " + name + "=");
   if (parts.length == 2) return parts.pop().split(";").shift();
 }
+
+checkVWO();
