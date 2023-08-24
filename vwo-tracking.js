@@ -57,7 +57,10 @@ var captureExperiments = function () {
         existingData.pop();
       }
     } else {
-      existingData[index] = newExperiment; // directly replace the existing data with the new data
+      // Update only properties present in new data, leave the rest unchanged
+      for (var key in newExperiment) {
+        existingData[index][key] = newExperiment[key];
+      }
     }
   });
 
