@@ -17,7 +17,8 @@ var checkVWO = function () {
 };
 
 // Capture the details of the running experiments
-var captureExperiments = function () {
+var captureExperiments = function (retryCount = 0) {
+  const MAX_RETRIES = 3;
   var experiments = window._vwo_exp_ids;
   var data = [];
 
@@ -29,6 +30,19 @@ var captureExperiments = function () {
       if (experiment) {
         var combinationNum = experiment.combination_chosen;
         var variationName = experiment.comb_n[combinationNum];
+
+        if (!variationName) {
+          console.warn("Missing variationName for experiment ID: " + id);
+          if (retryCount < MAX_RETRIES) {
+            captureExperiments(retryCount + 1);
+          } else {
+            console.error(
+              "Max retries reached. Unable to capture experiment with ID: " +
+                id,
+            );
+          }
+          continue; // skip this iteration, don't add incomplete experiment data
+        }
 
         if (experiment.status === "RUNNING") {
           data.push({
