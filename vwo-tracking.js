@@ -1,5 +1,5 @@
 const MAX_RETRIES = 3;
-const RETRY_DELAY = 1000; // 1 second delay
+const RETRY_DELAY = 2000; // 1 second delay
 
 const getCookie = (name) => {
   const value = `; ${document.cookie}`;
@@ -19,7 +19,7 @@ const checkVWO = () => {
     sendEventsToPlausible();
     console.log("::: VWO started");
   } else {
-    setTimeout(checkVWO, 50);
+    setTimeout(checkVWO, 150);
   }
 };
 
@@ -37,11 +37,10 @@ const captureExperiments = (retryCount = 0) => {
         const variationName = experiment.comb_n[combinationNum];
 
         if (!variationName) {
-          console.warn(`Missing variationName for experiment ID: ${id}`);
           if (retryCount < MAX_RETRIES) {
             setTimeout(() => captureExperiments(retryCount + 1), RETRY_DELAY);
           } else {
-            console.error(
+            console.warn(
               `Max retries reached. Unable to capture experiment with ID: ${id}`,
             );
           }
