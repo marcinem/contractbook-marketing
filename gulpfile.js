@@ -65,10 +65,10 @@ function demoTest() {
     .pipe(uglify())
     .pipe(gulp.dest("./__dist/"));
 }
-function mutinyTracking() {
+function vwoTracking() {
   return gulp
-    .src("./mutiny-tracking.js")
-    .pipe(concat("mutiny-tracking.min.js"))
+    .src("./vwo-tracking.js")
+    .pipe(concat("vwo-tracking.min.js"))
     .pipe(uglify())
     .pipe(gulp.dest("./__dist/"));
 }
@@ -102,7 +102,7 @@ gulp.task(
     newformtrackers,
     newpricing,
     demoTest,
-    mutinyTracking,
-    watchFiles
+    vwoTracking,
+    watchFiles,
   ),
 );
