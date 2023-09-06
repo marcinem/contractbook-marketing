@@ -25,8 +25,8 @@ const checkVWO = () => {
 
 const captureExperiments = (retryCount = 0) => {
   const experiments = window._vwo_exp_ids;
-  let data = [];
   let shouldRetry = false;
+  let newData = {};
 
   if (experiments) {
     for (let id of experiments) {
@@ -43,12 +43,12 @@ const captureExperiments = (retryCount = 0) => {
         }
 
         if (experiment.status === "RUNNING") {
-          data.push({
+          newData[id] = {
             id,
             name: experiment.name,
             type: experiment.type,
             variation: variationName,
-          });
+          };
         }
       }
     }
@@ -58,11 +58,16 @@ const captureExperiments = (retryCount = 0) => {
     }
   }
 
-  const existingData =
-    JSON.parse(localStorage.getItem("vwo_experiments")) || [];
-  const newData = [...existingData, ...data].slice(0, 5);
+  // Merge existing data with new data
+  const existingData = JSON.parse(localStorage.getItem("vwo_experiments")) || [];
+  const existingDataMap = Object.fromEntries(existingData.map(e => [e.id, e]));
+  
+  // Overwrite or add new experiments
+  Object.assign(existingDataMap, newData);
 
-  localStorage.setItem("vwo_experiments", JSON.stringify(newData));
+  // Convert back to array and store in localStorage
+  const mergedData = Object.values(existingDataMap);
+  localStorage.setItem("vwo_experiments", JSON.stringify(mergedData));
 };
 
 const updateVwoHubspotFields = () => {
