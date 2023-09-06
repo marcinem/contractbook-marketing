@@ -1,5 +1,5 @@
 const MAX_RETRIES = 3;
-const RETRY_DELAY = 2000; // 1 second delay
+const RETRY_DELAY = 2000; // 2 second delay
 
 const getCookie = (name) => {
   const value = `; ${document.cookie}`;
@@ -23,61 +23,38 @@ const checkVWO = () => {
   }
 };
 
-const captureExperiments = (retryCount = 0) => {
+const captureExperiments = async (retryCount = 0) => {
   const experiments = window._vwo_exp_ids;
+  if (!experiments) return;
+
   let data = [];
 
-  if (experiments) {
-    for (let i = 0; i < experiments.length; i++) {
-      const id = experiments[i];
-      const experiment = window._vwo_exp[id];
+  for (const id of experiments) {
+    const experiment = window._vwo_exp[id];
+    if (!experiment) continue;
 
-      if (experiment) {
-        const combinationNum = experiment.combination_chosen;
-        const variationName = experiment.comb_n[combinationNum];
+    const { combination_chosen, comb_n, status, name, type } = experiment;
+    const variationName = comb_n[combination_chosen];
 
-        if (!variationName) {
-          if (retryCount < MAX_RETRIES) {
-            setTimeout(() => captureExperiments(retryCount + 1), RETRY_DELAY);
-          } else {
-            console.warn(
-              `Max retries reached. Unable to capture experiment with ID: ${id}`,
-            );
-          }
-          continue;
-        }
+    if (!variationName && retryCount < MAX_RETRIES) {
+      return setTimeout(() => captureExperiments(retryCount + 1), RETRY_DELAY);
+    }
 
-        if (experiment.status === "RUNNING") {
-          data.push({
-            id,
-            name: experiment.name,
-            type: experiment.type,
-            variation: variationName,
-          });
-        }
-      }
+    if (status === "RUNNING") {
+      data.push({
+        id,
+        name,
+        type,
+        variation: variationName,
+      });
     }
   }
 
   const existingData =
     JSON.parse(localStorage.getItem("vwo_experiments")) || [];
+  const newData = [...existingData, ...data].slice(0, 5);
 
-  data.forEach((newExperiment) => {
-    const index = existingData.findIndex(
-      (existingExperiment) => existingExperiment.id === newExperiment.id,
-    );
-
-    if (index === -1) {
-      existingData.unshift(newExperiment);
-      if (existingData.length > 5) {
-        existingData.pop();
-      }
-    } else {
-      Object.assign(existingData[index], newExperiment);
-    }
-  });
-
-  localStorage.setItem("vwo_experiments", JSON.stringify(existingData));
+  localStorage.setItem("vwo_experiments", JSON.stringify(newData));
 };
 
 const updateVwoHubspotFields = () => {
