@@ -1,9 +1,16 @@
-// Wait for the VWO code to be fully loaded and check if the opt_out cookie exists.
-var checkVWO = function () {
-  // Check if the "_vis_opt_out" cookie exists
+const MAX_RETRIES = 3;
+const RETRY_DELAY = 1000; // 1 second delay
+
+const getCookie = (name) => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  return parts.length === 2 ? parts.pop().split(";").shift() : null;
+};
+
+const checkVWO = () => {
   if (getCookie("_vis_opt_out")) {
     console.log("::: Opted out of VWO");
-    return; // Exit the function if the cookie exists
+    return;
   }
 
   if (window._vwo_exp_ids) {
@@ -16,37 +23,34 @@ var checkVWO = function () {
   }
 };
 
-// Capture the details of the running experiments
-var captureExperiments = function (retryCount = 0) {
-  const MAX_RETRIES = 3;
-  var experiments = window._vwo_exp_ids;
-  var data = [];
+const captureExperiments = (retryCount = 0) => {
+  const experiments = window._vwo_exp_ids;
+  let data = [];
 
   if (experiments) {
-    for (var i = 0; i < experiments.length; i++) {
-      var id = experiments[i];
-      var experiment = window._vwo_exp[id];
+    for (let i = 0; i < experiments.length; i++) {
+      const id = experiments[i];
+      const experiment = window._vwo_exp[id];
 
       if (experiment) {
-        var combinationNum = experiment.combination_chosen;
-        var variationName = experiment.comb_n[combinationNum];
+        const combinationNum = experiment.combination_chosen;
+        const variationName = experiment.comb_n[combinationNum];
 
         if (!variationName) {
-          console.warn("Missing variationName for experiment ID: " + id);
+          console.warn(`Missing variationName for experiment ID: ${id}`);
           if (retryCount < MAX_RETRIES) {
-            captureExperiments(retryCount + 1);
+            setTimeout(() => captureExperiments(retryCount + 1), RETRY_DELAY);
           } else {
             console.error(
-              "Max retries reached. Unable to capture experiment with ID: " +
-                id,
+              `Max retries reached. Unable to capture experiment with ID: ${id}`,
             );
           }
-          continue; // skip this iteration, don't add incomplete experiment data
+          continue;
         }
 
         if (experiment.status === "RUNNING") {
           data.push({
-            id: id,
+            id,
             name: experiment.name,
             type: experiment.type,
             variation: variationName,
@@ -56,113 +60,76 @@ var captureExperiments = function (retryCount = 0) {
     }
   }
 
-  var existingData = JSON.parse(localStorage.getItem("vwo_experiments")) || [];
+  const existingData =
+    JSON.parse(localStorage.getItem("vwo_experiments")) || [];
 
-  data.forEach(function (newExperiment) {
-    var index = existingData.findIndex(function (existingExperiment) {
-      return existingExperiment.id === newExperiment.id;
-    });
+  data.forEach((newExperiment) => {
+    const index = existingData.findIndex(
+      (existingExperiment) => existingExperiment.id === newExperiment.id,
+    );
 
     if (index === -1) {
-      if (existingData.length < 5) {
-        existingData.unshift(newExperiment);
-      } else {
-        existingData.unshift(newExperiment);
+      existingData.unshift(newExperiment);
+      if (existingData.length > 5) {
         existingData.pop();
       }
     } else {
-      // Update only properties present in new data, leave the rest unchanged
-      for (var key in newExperiment) {
-        existingData[index][key] = newExperiment[key];
-      }
+      Object.assign(existingData[index], newExperiment);
     }
   });
 
   localStorage.setItem("vwo_experiments", JSON.stringify(existingData));
 };
 
-// Update Hubspot fields:
-function updateVwoHubspotFields() {
-  var experienceNameClass = "vwo_experience_names";
-  var impressionTypeClass = "vwo_impression_type";
-  var variationNamesClass = "vwo_variation_names";
+const updateVwoHubspotFields = () => {
+  const experienceNameClass = "vwo_experience_names";
+  const impressionTypeClass = "vwo_impression_type";
+  const variationNamesClass = "vwo_variation_names";
 
-  var experiences = JSON.parse(localStorage.getItem("vwo_experiments")) || [];
+  const experiences = JSON.parse(localStorage.getItem("vwo_experiments")) || [];
 
-  var experienceNames = experiences
-    .map(function (a) {
-      return a.name;
-    })
-    .join();
-  document.querySelector('input[name="' + experienceNameClass + '"]')
-    ? (document.querySelector(
-        'input[name="' + experienceNameClass + '"]',
-      ).value = experienceNames)
-    : null;
+  const updateField = (className, value) => {
+    const field = document.querySelector(`input[name="${className}"]`);
+    if (field) field.value = value;
+  };
 
-  var impressionTypes = experiences
-    .map(function (a) {
-      return a.type;
-    })
-    .join();
-  document.querySelector('input[name="' + impressionTypeClass + '"]')
-    ? (document.querySelector(
-        'input[name="' + impressionTypeClass + '"]',
-      ).value = impressionTypes)
-    : null;
+  updateField(experienceNameClass, experiences.map((a) => a.name).join());
+  updateField(impressionTypeClass, experiences.map((a) => a.type).join());
+  updateField(variationNamesClass, experiences.map((a) => a.variation).join());
+};
 
-  var variationNames = experiences
-    .map(function (a) {
-      return a.variation;
-    })
-    .join();
-  document.querySelector('input[name="' + variationNamesClass + '"]')
-    ? (document.querySelector(
-        'input[name="' + variationNamesClass + '"]',
-      ).value = variationNames)
-    : null;
-}
-
-function checkHubspotFormAndRun() {
+const checkHubspotFormAndRun = () => {
   if (document.querySelector('form[id^="hsForm"]')) {
     updateVwoHubspotFields();
   } else {
-    window.addEventListener("message", function (event) {
+    window.addEventListener("message", (event) => {
       if (
-        event.data.type === "hsFormCallback" &&
-        event.data.eventName === "onFormReady"
+        event.data?.type === "hsFormCallback" &&
+        event.data?.eventName === "onFormReady"
       ) {
         updateVwoHubspotFields();
       }
     });
   }
-}
+};
 
-// Plausible event tracking
-function sendEventsToPlausible() {
+const sendEventsToPlausible = () => {
   window.addEventListener("load", () => {
-    // this is wrapped in setTimeout because we need to wait for Plausbile to load.
     setTimeout(() => {
-      var experienceStorage = JSON.parse(
+      const experienceStorage = JSON.parse(
         localStorage.getItem("vwo_experiments"),
       );
       if (experienceStorage) {
-        experienceStorage.forEach(function (experiment) {
+        experienceStorage.forEach(({ name, variation }) => {
           plausible("VWO", {
             props: {
-              experiment: experiment.name + " | " + experiment.variation,
+              experiment: `${name} | ${variation}`,
             },
           });
         });
       }
     }, 2600);
   });
-}
-
-function getCookie(name) {
-  var value = "; " + document.cookie;
-  var parts = value.split("; " + name + "=");
-  if (parts.length == 2) return parts.pop().split(";").shift();
-}
+};
 
 checkVWO();
