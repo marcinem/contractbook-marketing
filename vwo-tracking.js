@@ -19,34 +19,42 @@ const checkVWO = () => {
     sendEventsToPlausible();
     console.log("::: VWO started");
   } else {
-    setTimeout(checkVWO, 150);
+    setTimeout(checkVWO, 2000);
   }
 };
 
-const captureExperiments = async (retryCount = 0) => {
+const captureExperiments = (retryCount = 0) => {
   const experiments = window._vwo_exp_ids;
-  if (!experiments) return;
-
   let data = [];
+  let shouldRetry = false;
 
-  for (const id of experiments) {
-    const experiment = window._vwo_exp[id];
-    if (!experiment) continue;
+  if (experiments) {
+    for (let id of experiments) {
+      const experiment = window._vwo_exp[id];
 
-    const { combination_chosen, comb_n, status, name, type } = experiment;
-    const variationName = comb_n[combination_chosen];
+      if (experiment) {
+        const combinationNum = experiment.combination_chosen;
+        const variationName = experiment.comb_n[combinationNum];
 
-    if (!variationName && retryCount < MAX_RETRIES) {
-      return setTimeout(() => captureExperiments(retryCount + 1), RETRY_DELAY);
+        if (!variationName) {
+          shouldRetry = true;
+          console.warn(`Unable to capture variation name for experiment with ID: ${id}`);
+          continue;
+        }
+
+        if (experiment.status === "RUNNING") {
+          data.push({
+            id,
+            name: experiment.name,
+            type: experiment.type,
+            variation: variationName,
+          });
+        }
+      }
     }
 
-    if (status === "RUNNING") {
-      data.push({
-        id,
-        name,
-        type,
-        variation: variationName,
-      });
+    if (shouldRetry && retryCount < MAX_RETRIES) {
+      return setTimeout(() => captureExperiments(retryCount + 1), RETRY_DELAY);
     }
   }
 
