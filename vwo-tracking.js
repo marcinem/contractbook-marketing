@@ -17,7 +17,7 @@ const checkVWO = () => {
     captureExperiments();
     checkHubspotFormAndRun();
     sendEventsToPlausible();
-    console.log("::: VWO started");
+    
   } else {
     setTimeout(checkVWO, 2000);
   }
@@ -38,7 +38,6 @@ const captureExperiments = (retryCount = 0) => {
 
         if (!variationName) {
           shouldRetry = true;
-          console.warn(`Unable to capture variation name for experiment with ID: ${id}`);
           continue;
         }
 
@@ -121,4 +120,4 @@ const sendEventsToPlausible = () => {
   });
 };
 
-checkVWO();
+setTimeout(checkVWO, 2000);
