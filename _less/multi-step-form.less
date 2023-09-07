@@ -1,135 +1,130 @@
 .multip-step-form {
-    .field_msf .image-size_1 {
-        opacity: 0;
-        transition: opacity 0.1s;
-        transform: translate(0, 3px);
-    }
-    .field_msf.filled .image-size_1 {
-        opacity: 1;
-    }
-
+  .field_msf .image-size_1 {
+    opacity: 0;
+    transition: opacity 0.1s;
+    transform: translate(0, 3px);
+  }
+  .field_msf.filled .image-size_1 {
+    opacity: 1;
+  }
 }
 .msf-step-1 {
-    .w-node-_4ea1f624-5adf-a78d-d88a-15cb7d54a667-da6f7506 {
-        width: 100%;
-    }
-    .white-tile_msf-hero {
-        padding-top: 2rem;
-    }
+  .w-node-_4ea1f624-5adf-a78d-d88a-15cb7d54a667-da6f7506 {
+    width: 100%;
+  }
+  .white-tile_msf-hero {
+    padding-top: 2rem;
+  }
 }
 
-.msf-step-1, .msf-step-2 {
-    #cookiescript_badge {
-        display: none;
-    }
+.msf-step-1,
+.msf-step-2 {
+  #cookiescript_badge {
+    display: none;
+  }
 }
-
-
-
-
 
 //------------------------hubspot
 .multi-step-form .hbspt-form {
-    padding-left: 32px;
+  padding-left: 32px;
 }
-.multi-step-form .hbspt-form label{
+.multi-step-form .hbspt-form label {
+  position: relative;
+}
+.multi-step-form .hbspt-form label:before {
+  position: absolute;
+  content: url("https://assets-global.website-files.com/622f565bf125560c02725fde/640ef747fef4eb237a0859de_Icon%20(1).svg");
+  left: -32px;
+  transform: translate(0, -1px);
+  opacity: 0;
+  transition: opacity 0.1s;
+}
+@media screen and (max-width: 375px) {
+  .multi-step-form .hbspt-form {
+    padding-left: 0;
+  }
+  .multi-step-form .hbspt-form label:before {
     position: relative;
-}
-.multi-step-form .hbspt-form label:before{
-    position: absolute;
-    content: url('https://assets-global.website-files.com/622f565bf125560c02725fde/640ef747fef4eb237a0859de_Icon%20(1).svg');
-    left: -32px;
-    transform: translate(0, -1px);
-    opacity: 0;
-    transition: opacity 0.1s;
-}
-@media screen and (max-width: 375px){
-    .multi-step-form .hbspt-form {
-        padding-left: 0;
-    }
-    .multi-step-form .hbspt-form label:before{
-        position: relative;
-        display: block;
-        left: 0;
-        transform: translate(0, 0);
-        margin-right: auto;
-        margin-bottom: 4px;
-
-    }
-    .multi-step-form .hbspt-form #hsForm_f7ecd4d4-2c45-44c2-b80e-bce529dbc495 {
-        max-width: 100%;
-    }
+    display: block;
+    left: 0;
+    transform: translate(0, 0);
+    margin-right: auto;
+    margin-bottom: 4px;
+  }
+  .multi-step-form .hbspt-form #hsForm_f7ecd4d4-2c45-44c2-b80e-bce529dbc495 {
+    max-width: 100%;
+  }
 }
 
-.multi-step-form .hbspt-form label span{
-    font-weight: bold;
-    font-size: 18px;
-    @media screen and (max-width: 375px){
-        font-size: 16px;
-    }
+.multi-step-form .hbspt-form label span {
+  font-weight: bold;
+  font-size: 18px;
+  @media screen and (max-width: 375px) {
+    font-size: 16px;
+  }
 }
 
-.multi-step-form .hbspt-form .hs-form-field.filled label:before{
-    opacity: 1
+.multi-step-form .hbspt-form .hs-form-field.filled label:before {
+  opacity: 1;
 }
-.multi-step-form .hbspt-form label.hs-error-msg:before{
-    content: '';
+.multi-step-form .hbspt-form label.hs-error-msg:before {
+  content: "";
 }
 
 .multi-step-form .hbspt-form label:not(.hs-error-msg) {
-    margin-bottom: 16px!important;
+  margin-bottom: 16px !important;
 }
-.multi-step-form .hbspt-form .form-columns-2  {
-    flex-wrap: wrap
+.multi-step-form .hbspt-form .form-columns-2 {
+  flex-wrap: wrap;
 }
 .multi-step-form .hbspt-form .form-columns-2 .hs-form-field {
-    width: 100%;
+  width: 100%;
 }
-.multi-step-form .hbspt-form .hs-form-field {
-    padding-bottom: 20px;
-    margin-bottom: 9px;
-    border-bottom: 1px solid #F0F0EC;
-}
+// .multi-step-form .hbspt-form .hs-form-field {
+//     padding-bottom: 20px;
+//     margin-bottom: 9px;
+//     border-bottom: 1px solid #F0F0EC;
+// }
 .multi-step-form .hbspt-form .hs-button {
-    padding: 18px 2rem!important;
-    line-height: 1.5!important;
-    margin-bottom: 24px;
+  padding: 18px 2rem !important;
+  line-height: 1.5 !important;
+  margin-bottom: 24px;
 }
 .multi-step-form .hbspt-form .actions {
-    height: auto;
+  height: auto;
 }
 .multi-step-form .hbspt-form form fieldset:nth-of-type(3),
 .multi-step-form .hbspt-form form fieldset:nth-of-type(4),
 .multi-step-form .hbspt-form form fieldset:nth-of-type(5) div:nth-child(1) {
-    display: none;
+  display: none;
 }
 .multi-step-form .hbspt-form ul.hs-error-msgs {
-    background: transparent;
-    border: none;
-    label {
-        color: red!important;
-    }
-    li {
-        margin: 2px 0 8px!important;
-    }
+  background: transparent;
+  border: none;
+  label {
+    color: red !important;
+  }
+  li {
+    margin: 2px 0 8px !important;
+  }
 }
 .multi-step-form .hbspt-form .clearout-error-msg {
-    color: red!important;
-    box-shadow: none!important;
+  color: red !important;
+  box-shadow: none !important;
 }
 .right-section.step-2 {
-    @media screen and (max-width: 767px){
-        padding-bottom: 16px;
-    }
+  @media screen and (max-width: 767px) {
+    padding-bottom: 16px;
+  }
 }
 
 .multi-step-form .hbspt-form form .hs-richtext {
-    left: 0;
-    right: 0;
-    margin: auto;
-    text-align: center;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
 }
 .multi-step-form .hbspt-form form .hs-richtext p {
-    text-align: center!important;
-    display: inline-block;
+  text-align: center !important;
+  display: inline-block;
 }
