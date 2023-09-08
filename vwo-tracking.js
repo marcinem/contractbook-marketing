@@ -17,7 +17,6 @@ const checkVWO = () => {
     captureExperiments();
     checkHubspotFormAndRun();
     sendEventsToPlausible();
-    
   } else {
     setTimeout(checkVWO, 2000);
   }
@@ -58,9 +57,12 @@ const captureExperiments = (retryCount = 0) => {
   }
 
   // Merge existing data with new data
-  const existingData = JSON.parse(localStorage.getItem("vwo_experiments")) || [];
-  const existingDataMap = Object.fromEntries(existingData.map(e => [e.id, e]));
-  
+  const existingData =
+    JSON.parse(localStorage.getItem("vwo_experiments")) || [];
+  const existingDataMap = Object.fromEntries(
+    existingData.map((e) => [e.id, e]),
+  );
+
   // Overwrite or add new experiments
   Object.assign(existingDataMap, newData);
 
@@ -116,7 +118,7 @@ const sendEventsToPlausible = () => {
           });
         });
       }
-    }, 2600);
+    }, 4000);
   });
 };
 
