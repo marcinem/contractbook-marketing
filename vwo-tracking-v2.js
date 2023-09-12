@@ -8,10 +8,7 @@
       }
       var expId = data[1],
         variationId = data[2];
-      if (
-        typeof _vwo_exp[expId].comb_n[variationId] !== "undefined" &&
-        _vwo_exp[expId].GTM
-      ) {
+      if (typeof _vwo_exp[expId].comb_n[variationId] !== "undefined") {
         console.log({
           CampaignId: expId,
           CampaignName: _vwo_exp[expId].name,
