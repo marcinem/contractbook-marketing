@@ -1,25 +1,26 @@
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 2000; // 2 second delay
 
-window._vis_opt_queue = window._vis_opt_queue || [];
-window._vis_opt_queue.push(function () {
-  const checkVWO = () => {
-    if (getCookie("_vis_opt_out")) {
-      console.log("::: Opted out of VWO");
-      return;
-    }
+const getCookie = (name) => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  return parts.length === 2 ? parts.pop().split(";").shift() : null;
+};
 
-    if (window._vwo_exp_ids) {
-      captureExperiments();
-      checkHubspotFormAndRun();
-      sendEventsToPlausible();
-    } else {
-      setTimeout(checkVWO, 2000);
-    }
-  };
+const checkVWO = () => {
+  if (getCookie("_vis_opt_out")) {
+    console.log("::: Opted out of VWO");
+    return;
+  }
 
-  checkVWO();
-});
+  if (window._vwo_exp_ids) {
+    captureExperiments();
+    checkHubspotFormAndRun();
+    sendEventsToPlausible();
+  } else {
+    setTimeout(checkVWO, 2000);
+  }
+};
 
 const captureExperiments = (retryCount = 0) => {
   const experiments = window._vwo_exp_ids;
@@ -120,3 +121,5 @@ const sendEventsToPlausible = () => {
     }, 4000);
   });
 };
+
+setTimeout(checkVWO, 2000);
