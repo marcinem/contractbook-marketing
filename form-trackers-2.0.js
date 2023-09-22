@@ -83,16 +83,17 @@ function getKnownParams() {
     (
       c ^
       (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
-    ).toString(16)
+    ).toString(16),
   );
 
   trackingParams["facebook_event_id"] = fbEventId;
+
+  trackingParams["rudderstack_anonymous_id"] = rudderanalytics.getAnonymousId();
 }
 
 // fill all the fields
 
 async function fillForms() {
-  console.log("Caller v1.0.1");
   await buildTrackingJar();
   for (const [key, value] of Object.entries(trackingParams)) {
     var fields = document.querySelectorAll(`[name="${key}"]`);
@@ -103,29 +104,3 @@ async function fillForms() {
     }
   }
 }
-
-// // fuction to debug the script on production
-// // async function fillForms() {
-//   await buildTrackingJar();
-//   var paramsField = document.querySelector('[name="analytics_logs"]');
-//   var objectsField = document.querySelector('[name="analytics_logs_lukas"]');
-//   var objectsFieldVals = "";
-
-//   paramsField.value = JSON.stringify(trackingParams);
-
-//   for (const [key, value] of Object.entries(trackingParams)) {
-//     var fields = document.querySelectorAll(`[name="${key}"]`);
-//     if (fields.length) {
-//       fields.forEach(function (field) {
-//         objectsFieldVals =
-//           objectsFieldVals +
-//           field.nodeName +
-//           ": name= " +
-//           field.name +
-//           "| value=" +
-//           value;
-//         objectsField.value = objectsFieldVals;
-//       });
-//     }
-//   }
-// }
