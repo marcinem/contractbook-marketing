@@ -1,6 +1,3 @@
-const MAX_RETRIES = 3;
-const RETRY_DELAY = 2000; // 2 second delay
-
 const getCookie = (name) => {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
@@ -13,7 +10,7 @@ const checkVWO = () => {
     return;
   }
 
-  if (window._vwo_exp_ids) {
+  if (window.VWO) {
     captureExperiments();
     checkHubspotFormAndRun();
     sendEventsToPlausible();
@@ -22,39 +19,44 @@ const checkVWO = () => {
   }
 };
 
-const captureExperiments = (retryCount = 0) => {
-  const experiments = window._vwo_exp_ids;
-  let shouldRetry = false;
+const captureExperiments = () => {
   let newData = {};
 
-  if (experiments) {
-    for (let id of experiments) {
-      const experiment = window._vwo_exp[id];
+  window.VWO = window.VWO || [];
+  VWO.push([
+    "onEventReceive",
+    "vA",
+    function (data) {
+      // To fetch A/B test id
+      var experimentId = data[1];
+      // To fetch A/B test active variation name
+      var variationId = data[2];
+      // To get A/B test name
+      var abTestName = _vwo_exp[experimentId].name;
+      // To get A/B test active variation name
+      var variationName = _vwo_exp[experimentId].comb_n[variationId];
+      // To get A/B test active experiment type name
+      var experimentTypeName = _vwo_exp[experimentId].type;
 
-      if (experiment) {
-        const combinationNum = experiment.combination_chosen;
-        const variationName = experiment.comb_n[combinationNum];
-
-        if (!variationName) {
-          shouldRetry = true;
-          continue;
-        }
-
-        if (experiment.status === "RUNNING") {
-          newData[id] = {
-            id,
-            name: experiment.name,
-            type: experiment.type,
-            variation: variationName,
-          };
-        }
+      if (
+        typeof _vwo_exp[experimentId].comb_n[variationId] !== "undefined" &&
+        ["VISUAL_AB", "VISUAL", "SPLIT_URL", "SURVEY"].indexOf(
+          _vwo_exp[experimentId].type,
+        ) > -1
+      ) {
+        newData[id] = {
+          experimentId,
+          name: abTestName,
+          type: experimentTypeName,
+          variation: variationName,
+        };
+        // Write your logic here to send the data at your end
+        console.log(
+          experimentId + ":" + abTestName + variationName + experimentTypeName,
+        );
       }
-    }
-
-    if (shouldRetry && retryCount < MAX_RETRIES) {
-      return setTimeout(() => captureExperiments(retryCount + 1), RETRY_DELAY);
-    }
-  }
+    },
+  ]);
 
   // Merge existing data with new data
   const existingData =
@@ -118,7 +120,7 @@ const sendEventsToPlausible = () => {
           });
         });
       }
-    }, 4000);
+    }, 2000);
   });
 };
 
