@@ -45,7 +45,7 @@ const captureExperiments = () => {
         ) > -1
       ) {
         newData[experimentId] = {
-          experimentId,
+          id: experimentId,
           name: abTestName,
           type: experimentTypeName,
           variation: variationName,
