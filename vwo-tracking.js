@@ -44,7 +44,7 @@ const captureExperiments = () => {
           _vwo_exp[experimentId].type,
         ) > -1
       ) {
-        newData[id] = {
+        newData[experimentId] = {
           experimentId,
           name: abTestName,
           type: experimentTypeName,
