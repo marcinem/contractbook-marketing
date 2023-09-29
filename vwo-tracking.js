@@ -106,22 +106,20 @@ const checkHubspotFormAndRun = () => {
 };
 
 const sendEventsToPlausible = () => {
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      const experienceStorage = JSON.parse(
-        localStorage.getItem("vwo_experiments"),
-      );
-      if (experienceStorage) {
-        experienceStorage.forEach(({ name, variation }) => {
-          plausible("VWO", {
-            props: {
-              experiment: `${name} | ${variation}`,
-            },
-          });
+  setTimeout(() => {
+    const experienceStorage = JSON.parse(
+      localStorage.getItem("vwo_experiments"),
+    );
+    if (experienceStorage) {
+      experienceStorage.forEach(({ name, variation }) => {
+        plausible("VWO", {
+          props: {
+            experiment: `${name} | ${variation}`,
+          },
         });
-      }
-    }, 2000);
-  });
+      });
+    }
+  }, 2000);
 };
 
 setTimeout(checkVWO, 2000);
