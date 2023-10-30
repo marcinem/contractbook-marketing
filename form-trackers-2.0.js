@@ -75,6 +75,11 @@ function getKnownParams() {
     trackingParams["ip_address_form"] = sessionStorage.getItem("clientIp");
   }
 
+  // get country from the local storage
+  if (sessionStorage.getItem("clientCountry")) {
+    trackingParams["country_contact"] = sessionStorage.getItem("clientCountry");
+  }
+
   // get user agent
   trackingParams["client_user_agent"] = window.navigator.userAgent;
 
