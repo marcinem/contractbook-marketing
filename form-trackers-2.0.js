@@ -105,7 +105,7 @@ async function fillForms() {
     if (fields.length) {
       fields.forEach(function (field) {
         field.value = value;
-        input.dispatchEvent(new Event('input', { bubbles: true }));
+        field.dispatchEvent(new Event('input', { bubbles: true }));
       });
     }
   }
