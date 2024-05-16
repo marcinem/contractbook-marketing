@@ -94,6 +94,7 @@ function getKnownParams() {
   trackingParams["facebook_event_id"] = fbEventId;
 
   trackingParams["rudderstack_anonymous_id"] = rudderanalytics.getAnonymousId();
+  trackingParams["segment_anonymous_id"] = analytics.user().anonymousId();
 }
 
 // fill all the fields
