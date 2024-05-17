@@ -20,8 +20,7 @@ const jsfiles = [
   "./scripts.js",
   "./utm-tracker-2.0.js",
   "./form-trackers-2.0.js",
-  "./uptimer-status.js",
-  "./plausible-events.js",
+  "./plausible-events.js"
 ];
 
 const cssfiles = ["./_less/style.less"];

@@ -7,7 +7,7 @@ window.addEventListener("message", (event) => {
     event.data.type === "hsFormCallback" &&
     event.data.eventName === "onFormReady"
   ) {
-    trackingParams = JSON.parse(Cookies.get("__utm"));
+    trackingParams = JSON.parse(Cookies.get("__utm")) || {};
     fbcCookie = Cookies.get("_fbc");
     fbpCookie = Cookies.get("_fbp");
     fillForms();
