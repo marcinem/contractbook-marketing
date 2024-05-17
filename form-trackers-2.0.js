@@ -1,13 +1,14 @@
 // form-trackers-2.0.js
 // Get all the know parameters and cookie values
 // and construct the new object
-var trackingParams, fbcCookie, fbpCookie;
+var utmCookie, trackingParams, fbcCookie, fbpCookie;
+utmCookie = Cookies.get("__utm");
 window.addEventListener("message", (event) => {
   if (
     event.data.type === "hsFormCallback" &&
     event.data.eventName === "onFormReady"
   ) {
-    trackingParams = JSON.parse(Cookies.get("__utm")) || {};
+    trackingParams = utmCookie ? JSON.parse(utmCookie) : {};
     fbcCookie = Cookies.get("_fbc");
     fbpCookie = Cookies.get("_fbp");
     fillForms();
