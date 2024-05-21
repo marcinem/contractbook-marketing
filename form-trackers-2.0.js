@@ -2,17 +2,20 @@
 // Get all the know parameters and cookie values
 // and construct the new object
 var utmCookie, trackingParams, fbcCookie, fbpCookie;
-utmCookie = Cookies.get("__utm");
-window.addEventListener("message", (event) => {
-  if (
-    event.data.type === "hsFormCallback" &&
-    event.data.eventName === "onFormReady"
-  ) {
-    trackingParams = utmCookie ? JSON.parse(utmCookie) : {};
-    fbcCookie = Cookies.get("_fbc");
-    fbpCookie = Cookies.get("_fbp");
-    fillForms();
-  }
+
+window.addEventListener("CookieScriptLoaded", () => {
+  utmCookie = Cookies.get("__utm");
+  window.addEventListener("message", (event) => {
+    if (
+      event.data.type === "hsFormCallback" &&
+      event.data.eventName === "onFormReady"
+    ) {
+      trackingParams = utmCookie ? JSON.parse(utmCookie) : {};
+      fbcCookie = Cookies.get("_fbc");
+      fbpCookie = Cookies.get("_fbp");
+      fillForms();
+    }
+  });
 });
 
 function buildTrackingJar() {
