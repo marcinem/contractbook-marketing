@@ -33,44 +33,44 @@ function js() {
     .pipe(gulp.dest("./__dist/"));
 }
 
-function newutms() {
-  return gulp
-    .src("./utm-tracker-2.0.js")
-    .pipe(concat("newutms.min.js"))
-    .pipe(uglify())
-    .pipe(gulp.dest("./__dist/"));
-}
+// function newutms() {
+//   return gulp
+//     .src("./utm-tracker-2.0.js")
+//     .pipe(concat("newutms.min.js"))
+//     .pipe(uglify())
+//     .pipe(gulp.dest("./__dist/"));
+// }
 
-function newpricing() {
-  return gulp
-    .src("./pricing_new.js")
-    .pipe(concat("pricing.min.js"))
-    .pipe(uglify())
-    .pipe(gulp.dest("./dist/"));
-}
+// function newpricing() {
+//   return gulp
+//     .src("./pricing_new.js")
+//     .pipe(concat("pricing.min.js"))
+//     .pipe(uglify())
+//     .pipe(gulp.dest("./dist/"));
+// }
 
-function newformtrackers() {
-  return gulp
-    .src("./form-trackers-2.0.js")
-    .pipe(concat("newforms.min.js"))
-    .pipe(uglify())
-    .pipe(gulp.dest("./__dist/"));
-}
+// function newformtrackers() {
+//   return gulp
+//     .src("./form-trackers-2.0.js")
+//     .pipe(concat("newforms.min.js"))
+//     .pipe(uglify())
+//     .pipe(gulp.dest("./__dist/"));
+// }
 
-function demoTest() {
-  return gulp
-    .src("./demo-test.js")
-    .pipe(concat("demo-test.min.js"))
-    .pipe(uglify())
-    .pipe(gulp.dest("./__dist/"));
-}
-function vwoTracking() {
-  return gulp
-    .src("./vwo-tracking.js")
-    .pipe(concat("vwo-tracking.min.js"))
-    .pipe(uglify())
-    .pipe(gulp.dest("./__dist/"));
-}
+// function demoTest() {
+//   return gulp
+//     .src("./demo-test.js")
+//     .pipe(concat("demo-test.min.js"))
+//     .pipe(uglify())
+//     .pipe(gulp.dest("./__dist/"));
+// }
+// function vwoTracking() {
+//   return gulp
+//     .src("./vwo-tracking.js")
+//     .pipe(concat("vwo-tracking.min.js"))
+//     .pipe(uglify())
+//     .pipe(gulp.dest("./__dist/"));
+// }
 // ---------------------------------------- CSS
 function css() {
   return gulp
@@ -97,11 +97,6 @@ gulp.task(
   gulp.parallel(
     js,
     css,
-    newutms,
-    newformtrackers,
-    newpricing,
-    demoTest,
-    vwoTracking,
     watchFiles,
   ),
 );
