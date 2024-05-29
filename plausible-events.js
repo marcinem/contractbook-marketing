@@ -49,21 +49,25 @@ window.addEventListener("message", (event) => {
       });
     });
 
-    countryField = document.querySelectorAll('select[name="country_contact"]');
-    countryFieldValue = countryField[0].value;
-    countryField.forEach((e) => {
-      e.addEventListener("change", (event) => {
-        countryFieldValue = event.target.value;
+    let countryField = document.querySelectorAll('select[name="country_contact"]');
+    if (countryField.length > 0) {
+      let countryFieldValue = countryField[0].value;
+      countryField.forEach((e) => {
+        e.addEventListener("change", (event) => {
+          countryFieldValue = event.target.value;
+        });
       });
-    });
+    }
 
-    industryField = document.querySelectorAll('select[name="industry_bucket"]');
-    industryFieldValue = industryField[0].value;
-    industryField.forEach((e) => {
-      e.addEventListener("change", (event) => {
-        industryFieldValue = event.target.value;
+    let industryField = document.querySelectorAll('select[name="industry_bucket"]');
+    if (industryField.length > 0) {
+      let industryFieldValue = industryField[0].value;
+      industryField.forEach((e) => {
+        e.addEventListener("change", (event) => {
+          industryFieldValue = event.target.value;
+        });
       });
-    });
+    }
   }
 });
 window.addEventListener("message", (event) => {
