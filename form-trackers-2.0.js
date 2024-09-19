@@ -96,19 +96,6 @@ window.addEventListener("CookieScriptLoaded", () => {
     );
 
     trackingParams["facebook_event_id"] = fbEventId;
-
-    trackingParams["rudderstack_anonymous_id"] = rudderanalytics.getAnonymousId();
-
-    (function waitForAnalyticsUser(i) {
-      if (typeof analytics !== "undefined" && analytics.user && analytics.user().anonymousId) {
-        trackingParams["segment_anonymous_id"] = analytics.user().anonymousId();
-      } else if (--i > 0) {
-        setTimeout(() => waitForAnalyticsUser(i), 1000);
-      } else {
-        console.error("Segment analytics not loaded in time");
-      }
-    })(10);
-    // trackingParams["segment_anonymous_id"] = analytics.user().anonymousId();
   }
 
   // fill all the fields
